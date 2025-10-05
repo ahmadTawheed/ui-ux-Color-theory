@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظرية الألوان - Ahmed Tawheed</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f43f5e;
+            --accent: #8b5cf6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e0e7ff;
+            transform: translateX(-5px);
+            border-color: var(--primary);
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background-color: #e0e7ff;
+        }
+        
+        .quiz-option.correct {
+            background-color: #dcfce7;
+            border-color: var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #fee2e2;
+            border-color: var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .interactive-example {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .interactive-example:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .design-principle-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .ui-example {
+            transition: all 0.3s ease;
+        }
+        
+        .ui-example:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            right: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            .desktop-menu {
+                display: none;
+            }
+        }
+        
+        .color-wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                red, 
+                orange, 
+                yellow, 
+                #7CFC00, 
+                green, 
+                cyan, 
+                blue, 
+                purple, 
+                magenta, 
+                red
+            );
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .color-wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .color-example {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        /* Quiz Navigation Buttons */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .quiz-nav button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quiz-nav button:not(:disabled):hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Interactive Color Mixer */
+        .color-mixer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .color-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-input {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .color-slider {
+            flex: 1;
+            height: 10px;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .color-result {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        /* Interactive Color Harmony */
+        .color-harmony-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .harmony-color {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .harmony-color:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Interactive UI Example */
+        .ui-example-container {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .ui-element {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ui-element:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ui-element.active {
+            border: 2px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl">
+                        S
+                    </div>
+                    <h1 class="text-xl font-bold mr-3">Ahmed Tawheed</h1>
+                </div>
+                
+                <nav class="desktop-menu">
+                    <ul class="flex space-x-8 space-x-reverse">
+                        <li><a href="#intro" class="nav-link text-gray-700 hover:text-indigo-600">المقدمة</a></li>
+                        <li><a href="#color-wheel" class="nav-link text-gray-700 hover:text-indigo-600">عجلة الألوان</a></li>
+                        <li><a href="#color-models" class="nav-link text-gray-700 hover:text-indigo-600">نماذج الألوان</a></li>
+                        <li><a href="#color-harmony" class="nav-link text-gray-700 hover:text-indigo-600">تناغم الألوان</a></li>
+                        <li><a href="#ui-ux" class="nav-link text-gray-700 hover:text-indigo-600">UI/UX</a></li>
+                        <li><a href="#quiz" class="nav-link text-gray-700 hover:text-indigo-600">اختبار</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu text-gray-700 focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu hidden bg-white py-4 px-4 shadow-lg" id="mobile-menu">
+            <ul class="space-y-3">
+                <li><a href="#intro" class="block text-gray-700 hover:text-indigo-600 py-2">المقدمة</a></li>
+                <li><a href="#color-wheel" class="block text-gray-700 hover:text-indigo-600 py-2">عجلة الألوان</a></li>
+                <li><a href="#color-models" class="block text-gray-700 hover:text-indigo-600 py-2">نماذج الألوان</a></li>
+                <li><a href="#color-harmony" class="block text-gray-700 hover:text-indigo-600 py-2">تناغم الألوان</a></li>
+                <li><a href="#ui-ux" class="block text-gray-700 hover:text-indigo-600 py-2">UI/UX</a></li>
+                <li><a href="#quiz" class="block text-gray-700 hover:text-indigo-600 py-2">اختبار</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">نظرية الألوان</h1>
+                    <p class="text-xl mb-6">شرح بالتفصيل الممل للون وعلاقته بالتصميم وUI/UX</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#color-wheel" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">
+                            ابدأ التعلم
+                        </a>
+                        <a href="#quiz" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-indigo-600 transition">
+                            اختبر معلوماتك
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                            <i class="fas fa-palette text-8xl"></i>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-red-500 flex items-center justify-center animate-bounce">
+                            <i class="fas fa-tint text-2xl text-white"></i>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center animate-bounce" style="animation-delay: 0.5s">
+                            <i class="fas fa-fill-drip text-2xl text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">مقدمة سريعة</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-indigo-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                <p class="text-lg mb-4">هشرحلك كل حاجة عن نظرية الألوان خطوة بخطوة — من العجلة الأساسية لحد استخدام اللون في واجهات المستخدم (UI/UX)، ومعاها أمثلة توضيحية (مش مشاريع) مرتبة من السهل للصعب، وفي الآخر هديك 10 أسئلة اختيار من متعدد للتثبيت وكمان عناوين للبحث لو حابب تتعمق أكثر.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Wheel Section -->
+    <section id="color-wheel" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">عجلة الألوان والألوان الأساسية والثانوية</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <div class="color-wheel mb-8"></div>
+                    <p class="text-center text-gray-600">عجلة الألوان (Color Wheel): دائرة بتنظم الألوان حسب العلاقة بينها — بتخليك تشوف بسرعة ألوان متناسقة أو متعاكسة.</p>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl card-shadow">
+                            <h3 class="text-xl font-bold mb-3 text-red-600">الألوان الأساسية (Primary)</h3>
+                            <p class="mb-3">في نموذج الألوان الضوئي (RGB): أحمر (R)، أخضر (G)، أزرق (B).</p>
+                            <p>في نموذج الألوان الطبعى/صبغي (RYB التقليدي للرسم): أحمر، أصفر، أزرق.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl card-shadow">
+                            <h3 class="text-xl font-bold mb-3 text-orange-600">الألوان الثانوية (Secondary)</h3>
+                            <p>بتتكوَّن من مزج لونين أساسيين. مثال: أحمر + أصفر = برتقالي.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl card-shadow">
+                            <h3 class="text-xl font-bold mb-3 text-purple-600">الألوان الثلاثية (Tertiary)</h3>
+                            <p>مزيج لون أساسي + لون ثانوي، زي أحمر-برتقالي.</p>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border-r-4 border-yellow-500">
+                            <p class="font-medium">ملاحظات بسيطة: في شغل الويب والتصميم الرقمي بنستخدم RGB أو HSL، وفي الطباعة بنستخدم CMYK.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Properties Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">تدرج لوني / شفافية / التركيز / التشبع</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-3 text-indigo-700">التدرج اللوني (Gradient)</h3>
+                    <div class="color-example" style="background: linear-gradient(to right, #6366f1, #8b5cf6);"></div>
+                    <p>انتقال سلس بين لونين أو أكثر. ليه مهم؟ بيدي عمق وحركة بصريّة.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-3 text-purple-700">الشفافية (Opacity)</h3>
+                    <div class="color-example" style="background-color: rgba(99, 102, 241, 0.5);"></div>
+                    <p>مدى رؤية لون خلفه؛ قيمة من 0 (شفاف تماماً) إلى 1 (غير شفاف). تُستخدم لتخفيف تأثير عنصر أو لعمل طبقات.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-3 text-pink-700">التركيز (Focus)</h3>
+                    <div class="color-example" style="background-color: #f43f5e;"></div>
+                    <p>استخدام اللون لجذب الانتباه (مثلاً زر CTA بلون قوي مقابل خلفية باهتة).</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold mb-3 text-green-700">التشبع (Saturation)</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-3">
+                        <div class="flex-1 h-12 rounded" style="background-color: hsl(120, 100%, 50%);"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: hsl(120, 50%, 50%);"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: hsl(120, 20%, 50%);"></div>
+                    </div>
+                    <p>مدى "نقاء" اللون. لون مشبع عالي = قوي وواضح. منخفض = هادئ أو باهت (muted).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Models Section -->
+    <section id="color-models" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">نماذج الألوان: RGB و CMYK (وبسطر عن HSL/HSV)</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl card-shadow" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-600">RGB</h3>
+                    <p class="mb-4">(Red, Green, Blue): خاص بالشاشات. اللون بنتحصل عليه بخلط ضوء.</p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <p class="text-center font-mono">R=255,G=0,B=0 => أحمر ساطع</p>
+                    </div>
+                    <div class="flex justify-center space-x-2 space-x-reverse">
+                        <div class="w-12 h-12 rounded-full bg-red-500"></div>
+                        <div class="w-12 h-12 rounded-full bg-green-500"></div>
+                        <div class="w-12 h-12 rounded-full bg-blue-500"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl card-shadow" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-600">CMYK</h3>
+                    <p class="mb-4">(Cyan, Magenta, Yellow, Key/Black): خاص بالطباعة. الألوان بتُطبع عن طريق امتصاص/عكس الضوء.</p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <p class="text-center">يستخدم في الطابعات والنشر المطبوع</p>
+                    </div>
+                    <div class="flex justify-center space-x-2 space-x-reverse">
+                        <div class="w-12 h-12 rounded-full bg-cyan-500"></div>
+                        <div class="w-12 h-12 rounded-full bg-magenta-500"></div>
+                        <div class="w-12 h-12 rounded-full bg-yellow-400"></div>
+                        <div class="w-12 h-12 rounded-full bg-black"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl card-shadow" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-600">HSL / HSV</h3>
+                    <p class="mb-4">طريقة وصف اللون من حيث:</p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-indigo-500 mt-1.5 ml-2"></i>
+                            <span>Hue (الصبغة)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-indigo-500 mt-1.5 ml-2"></i>
+                            <span>Saturation (التشبع)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-indigo-500 mt-1.5 ml-2"></i>
+                            <span>Lightness/Value (الإضاءة/السطوع)</span>
+                        </li>
+                    </ul>
+                    <p>مفيدة علشان تعدل ألوان بشكل بديهي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Choosing Colors Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">اختيار الألوان المناسبة للمشروع</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow mb-8" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-center">عوامل لازم تفكر فيها:</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">1</div>
+                                <h4 class="font-bold">الهدف والرسالة</h4>
+                            </div>
+                            <p>هل المشروع رسمي؟ مرح؟ شبابي؟</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">2</div>
+                                <h4 class="font-bold">الجمهور المستهدف</h4>
+                            </div>
+                            <p>ثقافة الجمهور تؤثر — ألوان لها دلالات ثقافية.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">3</div>
+                                <h4 class="font-bold">النداء البصري (Contrast)</h4>
+                            </div>
+                            <p>لسهولة القراءة (خصوصًا للأشخاص ضعاف البصر). اتأكد من نسب التباين (مثلاً WCAG).</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">4</div>
+                                <h4 class="font-bold">الهوية البصرية والبراندينج</h4>
+                            </div>
+                            <p>الألوان الرئيسية والفرعية وثباتها عبر المطبوعات والشاشة.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">5</div>
+                                <h4 class="font-bold">البيئة التقنية</h4>
+                            </div>
+                            <p>شاشة (RGB) ولا طباعة (CMYK)؟ لازم تبيّن الألوان صح.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg">
+                            <div class="flex items-start mb-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold ml-3 flex-shrink-0">6</div>
+                                <h4 class="font-bold">تجربة المستخدم</h4>
+                            </div>
+                            <p>لون الخطأ، النجاح، تحذيرات، أزرار CTA — كل ده لازم واضح ومتناسق.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Tools Section -->
+    <section class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">أهم المواقع لاختيار الألوان</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-2">Coolors</h3>
+                    <p class="text-gray-600 mb-4">أداة سريعة لإنشاء لوحات ألوان متعددة</p>
+                    <div class="flex justify-center">
+                        <a href="https://coolors.co" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-2">Adobe Color</h3>
+                    <p class="text-gray-600 mb-4">عجلة ألوان تفاعلية واستكشاف تناغم الألوان</p>
+                    <div class="flex justify-center">
+                        <a href="https://color.adobe.com" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-2">Material Palette</h3>
+                    <p class="text-gray-600 mb-4">أداة جوجل لإنشاء لوحات ألوان متوافقة مع Material Design</p>
+                    <div class="flex justify-center">
+                        <a href="https://material.io/resources/color/" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold mb-2">Color Hunt</h3>
+                    <p class="text-gray-600 mb-4">مجموعة من لوحات الألوان الجاهزة للاستخدام</p>
+                    <div class="flex justify-center">
+                        <a href="https://colorhunt.co" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-bold mb-2">Paletton</h3>
+                    <p class="text-gray-600 mb-4">أداة متقدمة لاستكشاف تناغم الألوان</p>
+                    <div class="flex justify-center">
+                        <a href="http://paletton.com" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="text-xl font-bold mb-2">Contrast Checker</h3>
+                    <p class="text-gray-600 mb-4">للتحقق من نسب التباين بين الألوان</p>
+                    <div class="flex justify-center">
+                        <a href="https://webaim.org/resources/contrastchecker/" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                            <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Harmony Section -->
+    <section id="color-harmony" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">قواعد التناغم (Color Harmony)</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">أنواعها الرئيسية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-3 text-indigo-700">Complementary (متكامل)</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #ef4444;"></div>
+                    </div>
+                    <p>لون ومعاكسه على العجلة → تباين قوي.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-3 text-purple-700">Analogous (متجاور)</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #6366f1;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #8b5cf6;"></div>
+                    </div>
+                    <p>ألوان قريبة على العجلة → نغمة متناغمة وهادئة.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-3 text-pink-700">Triadic (مثلث)</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #ef4444;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #10b981;"></div>
+                    </div>
+                    <p>3 ألوان متفرقة بالتساوي → توازن حيوي.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold mb-3 text-green-700">Tetradic / Double Complementary</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #ef4444;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #10b981;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #f59e0b;"></div>
+                    </div>
+                    <p>مجموعتين مكملتين → غني بالألوان لكن صعب التوازن.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-bold mb-3 text-yellow-700">Split-Complementary</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #f59e0b;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #ef4444;"></div>
+                    </div>
+                    <p>لون + لونيْن مجاورين لمكمّله → تباين أقل حدة من الـ Complementary.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="text-xl font-bold mb-3 text-red-700">Monochromatic</h3>
+                    <div class="flex space-x-2 space-x-reverse mb-4">
+                        <div class="flex-1 h-12 rounded" style="background-color: #1d4ed8;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #3b82f6;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #93c5fd;"></div>
+                        <div class="flex-1 h-12 rounded" style="background-color: #dbeafe;"></div>
+                    </div>
+                    <p>درجات مختلفة من نفس الصبغة → بسيط ومتناسق.</p>
+                </div>
+            </div>
+            
+            <!-- Interactive Color Harmony Demo -->
+            <div class="mt-12 max-w-4xl mx-auto bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                <h3 class="text-xl font-bold mb-4 text-center">جرب بنفسك: اختر نوع التناغم</h3>
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="showHarmony('complementary')">Complementary</button>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="showHarmony('analogous')">Analogous</button>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="showHarmony('triadic')">Triadic</button>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="showHarmony('monochromatic')">Monochromatic</button>
+                </div>
+                <div class="color-harmony-demo" id="color-harmony-demo">
+                    <div class="harmony-color" style="background-color: #3b82f6;" onclick="copyColor('#3b82f6')">أزرق</div>
+                    <div class="harmony-color" style="background-color: #8b5cf6;" onclick="copyColor('#8b5cf6')">بنفسجي</div>
+                    <div class="harmony-color" style="background-color: #ec4899;" onclick="copyColor('#ec4899')">وردي</div>
+                </div>
+                <p class="text-center mt-4 text-gray-600">انقر على أي لون لنسخه</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Psychology Section -->
+    <section class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">عوامل نفسية وثقافية للون</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Color Psychology</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">أحمر</h3>
+                    <p class="text-center">طاقة/خطر/حب (ممكن يُستخدم للـ CTA أو تحذير).</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">أزرق</h3>
+                    <p class="text-center">ثقة/احترافية (شائع في البنوك والتقنية).</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">أخضر</h3>
+                    <p class="text-center">طبيعى/صحة/نجاح.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-sun text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">أصفر</h3>
+                    <p class="text-center">فرح/انتباه (يفضل استخدامه باعتدال).</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-crown text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">بنفسجي</h3>
+                    <p class="text-center">إبداع/رفاهية/غموض.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl card-shadow hover-scale" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-fire text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">برتقالي</h3>
+                    <p class="text-center">حماس/إبداع/دفء.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-yellow-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                <h3 class="text-xl font-bold mb-4 text-center">ملاحظة مهمة</h3>
+                <div class="bg-white p-6 rounded-lg border-r-4 border-yellow-500">
+                    <p class="text-center">المعاني تختلف بحسب الثقافة والسياق — ما ينفعش نعتمد عليها لوحدها.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessibility Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">قابلية الوصول (Accessibility)</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">أساسيات مهمة جداً</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl card-shadow" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-700">نسبة التباين (Contrast Ratio)</h3>
+                    <p class="mb-4">مثال هدف WCAG: نص عادي نسبة لا تقل عن 4.5:1 (أحيانًا 3:1 للخطوط الكبيرة).</p>
+                    <p>لازم تختبر الألوان للنصوص والأزرار.</p>
+                    <div class="mt-6 bg-white p-4 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">نص على خلفية:</span>
+                            <span class="font-bold text-green-600">4.5:1 ✓</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">نص على خلفية:</span>
+                            <span class="font-bold text-red-600">2.5:1 ✗</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl card-shadow" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-700">ألوان للمعاقين/ضعاف الألوان</h3>
+                    <p class="mb-4">اختبار الاختلافات ليس فقط باللون بل بالشكل/النص/الأيقونة.</p>
+                    <div class="mt-6 bg-white p-4 rounded-lg">
+                        <p class="mb-3">أنواع عمى الألوان:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-circle text-xs text-purple-500 ml-2"></i>
+                                <span>Deuteranopia (أخضر/أحمر)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-circle text-xs text-purple-500 ml-2"></i>
+                                <span>Protanopia (أحمر/أخضر)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-circle text-xs text-purple-500 ml-2"></i>
+                                <span>Tritanopia (أزرق/أصفر)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl card-shadow" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-4 text-pink-700">لا تعتمد على اللون فقط</h3>
+                    <p class="mb-4">استخدم أيقونات، نصوص، نماذج مختلفة لتوضيح حالات (خطأ/نجاح...).</p>
+                    <div class="mt-6 bg-white p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center ml-3">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p>نجاح: أيقونة ✓ + نص "تم الحفظ"</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center ml-3">
+                                <i class="fas fa-times text-red-600"></i>
+                            </div>
+                            <p>خطأ: أيقونة ✕ + نص "حدث خطأ"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Performance Section -->
+    <section class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">كيف تؤثر الألوان على الأداء</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">اختبار A/B</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-indigo-700">اختبار A/B للألوان</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-3"></i>
+                                <p>تغيير لون زر CTA ممكن يرفع نسبة النقر (CTR).</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-3"></i>
+                                <p>لكن التأثير يعتمد على التباين، السياق، ومرحلة المستخدم.</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-3"></i>
+                                <p>دايمًا اختبر ولا تفترض: A/B testing هو الحل.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <div class="mb-6">
+                            <h4 class="font-bold mb-2">النسخة A</h4>
+                            <div class="bg-white p-4 rounded border border-gray-300">
+                                <button class="w-full py-3 bg-blue-500 text-white rounded-lg">اشترك الآن</button>
+                                <p class="text-center mt-2 text-sm text-gray-600">معدل التحويل: 2.5%</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold mb-2">النسخة B</h4>
+                            <div class="bg-white p-4 rounded border border-gray-300">
+                                <button class="w-full py-3 bg-green-500 text-white rounded-lg">اشترك الآن</button>
+                                <p class="text-center mt-2 text-sm text-gray-600">معدل التحويل: 3.8%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">أمثلة توضيحية</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">مرتبة من السهل للصعب</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">مثال 1 — سهل: مزج لونين للحصول على ثانوي</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-center mb-4">
+                                <div class="w-16 h-16 rounded-full bg-red-500 mx-2"></div>
+                                <i class="fas fa-plus text-2xl text-gray-600 mx-2"></i>
+                                <div class="w-16 h-16 rounded-full bg-yellow-400 mx-2"></div>
+                                <i class="fas fa-equals text-2xl text-gray-600 mx-2"></i>
+                                <div class="w-16 h-16 rounded-full bg-orange-500 mx-2"></div>
+                            </div>
+                            <p class="text-center">لو عندك أحمر + أصفر → بتحصل على برتقالي. لو خففت تشبع الأحمر هتلاقي برتقالي أفتح (tint).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">مثال 2 — سهل-متوسط: اختيار لوحة ألوان كوماتش</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-16 h-16 rounded-full bg-green-600 mx-1"></div>
+                                <div class="w-16 h-16 rounded-full bg-green-500 mx-1"></div>
+                                <div class="w-16 h-16 rounded-full bg-green-400 mx-1"></div>
+                                <div class="w-16 h-16 rounded-full bg-yellow-300 mx-1"></div>
+                            </div>
+                            <p class="text-center">عايز لوح لون هادي لموقع مدونة صحية؟ اختار لوحة Analogous بلون أخضر كأساس + أخضر أفتح + أصفر باهت.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">مثال 3 — متوسط: زر CTA عالي التركيز</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <div class="bg-gray-200 p-6 rounded-lg mb-4">
+                                <button class="px-6 py-3 bg-red-500 text-white rounded-lg font-bold mx-auto block">اشترك الآن</button>
+                            </div>
+                            <p class="text-center">خلفية صفحة رصاصية فاتحة، زِر CTA أحمر مشبع لأن الأحمر بيجذب العين. لازم تتأكد من نسبة تباين النص داخل الزر (أبيض على أحمر مثلاً).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">مثال 4 — متوسط-صعب: تدرج لوني مع شفافية للعمق</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+                                <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Background" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                    <h4 class="text-xl font-bold">عنوان فوق الصورة</h4>
+                                    <p>نص واضح فوق الخلفية بفضل الطبقة الشفافة</p>
+                                </div>
+                            </div>
+                            <p class="text-center">خلفية فيها صورة، عايز تضع شريط نص فوقها سابقًا: استعمل طبقة سوداء شفافة (opacity 0.5) وتدرج من شفاف إلى 0.6 علشان يقرو النص بدون فقدان التفاصيل.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">مثال 5 — صعب: تجهيز لوحة ألوان للطبعة (CMYK)</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <div class="w-16 h-16 rounded-full mx-auto mb-2" style="background-color: #0057B8;"></div>
+                                    <p class="text-center font-medium">RGB: #0057B8</p>
+                                    <p class="text-center text-sm text-gray-600">للشاشات</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <div class="w-16 h-16 rounded-full mx-auto mb-2" style="background-color: #004C99;"></div>
+                                    <p class="text-center font-medium">CMYK: 100,70,0,0</p>
+                                    <p class="text-center text-sm text-gray-600">للطباعة</p>
+                                </div>
+                            </div>
+                            <p class="text-center">عندك شعار بلون RGB مش ممكن الطباعة تطابقه تمامًا. لازم تحول اللون لـ CMYK وتعدله (أو تختار بدائل مطابقة للنُسخ المطبوعة) وتتأكد إن الألوان المطبوعه لا تزول أو تتغير تحت ضوء مختلف.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI/UX Section -->
+    <section id="ui-ux" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">دور نظرية الألوان في مجال UI / UX</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">شرح بالتفصيل الممل</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">أ) تعريف الهرمية البصرية (Visual Hierarchy)</h3>
+                    <p>اللون بيساعد يحدد مين الأهم في الصفحة: زِر بلون مشبع + خلفية باهتة => يبرُز. الهيراركية بتخلي المستخدم يعرف يمشي في الواجهة بدون تفكير.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="flex items-center justify-center space-x-4 space-x-reverse">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg">زر ثانوي</button>
+                            <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-bold">زر رئيسي</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg">زر ثانوي</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">ب) الحالة النفسية والتوجيه (Mood & Tone)</h3>
+                    <p>اختيار لوحة ألوان يبلور انطباع المستخدم: موقع بنكي يحتاج أزرق موثوق، تطبيق أطفال ممكن يستخدم ألوان مشبعة ومبهجة.</p>
+                    <div class="mt-4 grid grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                            <h4 class="font-bold mb-2 text-blue-700">موقع بنكي</h4>
+                            <div class="flex space-x-2 space-x-reverse mb-2">
+                                <div class="w-8 h-8 rounded" style="background-color: #1e40af;"></div>
+                                <div class="w-8 h-8 rounded" style="background-color: #3b82f6;"></div>
+                                <div class="w-8 h-8 rounded" style="background-color: #93c5fd;"></div>
+                            </div>
+                            <p class="text-sm">ألوان تعطي إحساس بالثقة والاحترافية</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                            <h4 class="font-bold mb-2 text-yellow-700">تطبيق أطفال</h4>
+                            <div class="flex space-x-2 space-x-reverse mb-2">
+                                <div class="w-8 h-8 rounded" style="background-color: #f59e0b;"></div>
+                                <div class="w-8 h-8 rounded" style="background-color: #ef4444;"></div>
+                                <div class="w-8 h-8 rounded" style="background-color: #8b5cf6;"></div>
+                            </div>
+                            <p class="text-sm">ألوان مشبعة ومبهجة تجذب الانتباه</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">ج) القابلية للاكتشاف (Affordance)</h3>
+                    <p>الألوان بتعطي دلالات للعناصر التفاعلية: الأزرار، الروابط، الحقول. لون مختلف للـ hover وactive يعزز الفهم.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="flex flex-col items-center">
+                            <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg mb-2 hover:bg-indigo-700 transition">اضغط هنا</button>
+                            <p class="text-sm text-gray-600">لون مختلف عند التفاعل (hover) يؤكد أن العنصر تفاعلي</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">د) الاتساق والهوية (Consistency & Branding)</h3>
+                    <p>خلي ألوان العلامة ثابتة في كل الشاشات: ألوان رئيسية، ثانوية، ألوان الحالات (error/success/warning). الاتساق يقلل الحمل المعرفي للمستخدم.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="text-center">
+                                <div class="w-12 h-12 rounded mx-auto mb-1" style="background-color: #3b82f6;"></div>
+                                <p class="text-xs">أساسي</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 rounded mx-auto mb-1" style="background-color: #8b5cf6;"></div>
+                                <p class="text-xs">ثانوي</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 rounded mx-auto mb-1" style="background-color: #10b981;"></div>
+                                <p class="text-xs">نجاح</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 rounded mx-auto mb-1" style="background-color: #ef4444;"></div>
+                                <p class="text-xs">خطأ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">هـ) قابلية الوصول (Accessibility)</h3>
+                    <p>اختيار ألوان حسب نسب تباين صحيحة، واختبار حالات عمى الألوان، وإضافة مؤشرات غير لونية (أيقونات/نصوص).</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-2">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                    <span>تم الحفظ بنجاح</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center mr-2">
+                                        <i class="fas fa-times text-white text-xs"></i>
+                                    </div>
+                                    <span>حدث خطأ أثناء الحفظ</span>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <p>أيقونة + نص + لون</p>
+                                <p>سهل الفهم للجميع</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">و) ألوان للتفاعل والزمن الحقيقي (Micro-interactions & Feedback)</h3>
+                    <p>مثال: لون يتحول إلى أخضر عند نجاح حفظ، أحمر لخطأ. التغيير اللوني هذا يعطي رد فعل لحظي للمستخدم ويؤكد حدوث شيء.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="flex flex-col items-center">
+                            <div class="flex space-x-4 space-x-reverse mb-4">
+                                <div class="w-16 h-16 rounded-lg bg-gray-200 flex items-center justify-center">
+                                    <i class="fas fa-save text-gray-600"></i>
+                                </div>
+                                <i class="fas fa-arrow-left text-gray-600 self-center"></i>
+                                <div class="w-16 h-16 rounded-lg bg-green-100 flex items-center justify-center border-2 border-green-500">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600">تغير اللون عند حفظ البيانات يعطي تأكيدًا فوريًا للمستخدم</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">ز) بيانات/رسوم بيانية (Data Visualization)</h3>
+                    <p>اختيار ألوان متباينة ومقروءة مهم جدًا لتقليل الالتباس بين السلاسل (series). تجنب استخدام ألوان متقاربة لخطوط متعددة.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="flex justify-center">
+                            <div class="w-64 h-32 flex items-end space-x-2 space-x-reverse">
+                                <div class="w-12 h-20 bg-blue-500 rounded-t"></div>
+                                <div class="w-12 h-16 bg-red-500 rounded-t"></div>
+                                <div class="w-12 h-24 bg-green-500 rounded-t"></div>
+                                <div class="w-12 h-12 bg-yellow-500 rounded-t"></div>
+                                <div class="w-12 h-28 bg-purple-500 rounded-t"></div>
+                            </div>
+                        </div>
+                        <p class="text-center mt-2 text-sm text-gray-600">ألوان متباينة تجعل البيانات سهلة القراءة والتمييز</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 card-shadow" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">ح) الملاءمة عبر الأجهزة (Color Management)</h3>
+                    <p>الألوان على الشاشة ممكن تظهر مختلفة باختلاف جهاز المستخدم. للمصممين: افحص على شاشات مختلفة، واعرف حدود CMYK للطباعة.</p>
+                    <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-bold mb-2">للشاشات (RGB)</h4>
+                                <div class="flex space-x-2 space-x-reverse">
+                                    <div class="w-8 h-8 rounded" style="background-color: #3b82f6;"></div>
+                                    <div class="w-8 h-8 rounded" style="background-color: #ef4444;"></div>
+                                    <div class="w-8 h-8 rounded" style="background-color: #10b981;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">للطباعة (CMYK)</h4>
+                                <div class="flex space-x-2 space-x-reverse">
+                                    <div class="w-8 h-8 rounded" style="background-color: #2c5aa0;"></div>
+                                    <div class="w-8 h-8 rounded" style="background-color: #c62828;"></div>
+                                    <div class="w-8 h-8 rounded" style="background-color: #2e7d32;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center mt-2 text-sm text-gray-600">نفس الألوان قد تظهر مختلفة على الشاشات وعند الطباعة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI/UX Examples Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">أمثلة توضيحية على دور الألوان في UI/UX</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">أزرار الحالة (Button states)</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">افتراضي</p>
+                            <button class="w-full py-3 bg-blue-500 text-white rounded-lg">زر افتراضي</button>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">عند المرور (hover)</p>
+                            <button class="w-full py-3 bg-blue-600 text-white rounded-lg shadow-md">زر عند المرور</button>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">عند الضغط (active)</p>
+                            <button class="w-full py-3 bg-blue-700 text-white rounded-lg shadow-inner">زر عند الضغط</button>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm">زر افتراضي بلون أزرق فاتح، عند hover يصبح أزرق أغمق، وعند الضغط يظهر ظل داخلي — يعطي تأكيد بصري للتفاعل.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow" data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">رسائل الخطأ/النجاح</h3>
+                    <div class="space-y-4">
+                        <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-green-800">تم بنجاح</h4>
+                                    <p class="text-green-700">تم حفظ التغييرات بنجاح</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-times text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-red-800">خطأ</h4>
+                                    <p class="text-red-700">حدث خطأ أثناء الحفظ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm">استخدام أحمر للخطأ مع أيقونة ×، أخضر للنجاح مع أيقونة ✓ — اللون مع الأيقونة يعزز الفهم السريع.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">لوحة ألوان لداشبورد بيانات</h3>
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>المبيعات</span>
+                            <span class="font-bold">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>المستخدمين</span>
+                            <span class="font-bold">45%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="flex justify-between mb-2">
+                            <span>التحويلات</span>
+                            <span class="font-bold">30%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm">اختيار تدرجات متباينة للأرقام والإشعارات، وإعطاء ألوان منفصلة للسلاسل الأكثر أهمية.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow" data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">خريطة تفاعلية</h3>
+                    <div class="bg-white p-4 rounded-lg mb-4">
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="h-12 bg-green-500 rounded flex items-center justify-center text-white text-xs">منخفض</div>
+                            <div class="h-12 bg-yellow-500 rounded flex items-center justify-center text-white text-xs">متوسط</div>
+                            <div class="h-12 bg-red-500 rounded flex items-center justify-center text-white text-xs">عالي</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <div class="h-12 bg-green-400 rounded flex items-center justify-center text-white text-xs">منخفض</div>
+                            <div class="h-12 bg-yellow-400 rounded flex items-center justify-center text-white text-xs">متوسط</div>
+                            <div class="h-12 bg-red-400 rounded flex items-center justify-center text-white text-xs">عالي</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <div class="h-12 bg-green-300 rounded flex items-center justify-center text-white text-xs">منخفض</div>
+                            <div class="h-12 bg-yellow-300 rounded flex items-center justify-center text-white text-xs">متوسط</div>
+                            <div class="h-12 bg-red-300 rounded flex items-center justify-center text-white text-xs">عالي</div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm">تدرج لوني (من أخضر إلى أحمر) لتمثيل شدة/مقدار — يسهل استيعاب التوزيع.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow md:col-span-2" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-700">Onboarding highlight</h3>
+                    <div class="bg-white p-6 rounded-lg">
+                        <div class="flex flex-col items-center">
+                            <div class="relative mb-6">
+                                <div class="w-64 h-12 bg-gray-200 rounded-lg"></div>
+                                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-lg text-sm">
+                                    انقر هنا للبدء
+                                </div>
+                                <div class="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
+                            </div>
+                            <p class="text-sm text-gray-600">جعل العنصر المفروض يلاحظه المستخدم بلون مشبع وخلفية باهتة لباقي الصفحة لتوجيه الانتباه.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interactive UI Example -->
+            <div class="mt-12 max-w-4xl mx-auto bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-up">
+                <h3 class="text-xl font-bold mb-4 text-center">جرب بنفسك: تصميم واجهة بسيطة</h3>
+                <div class="ui-example-container">
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="ui-element" onclick="selectUIElement(this, 'header')">
+                            <h4 class="font-bold">الرأسية</h4>
+                            <p>لون الخلفية: <span class="color-value">#6366f1</span></p>
+                        </div>
+                        <div class="ui-element" onclick="selectUIElement(this, 'sidebar')">
+                            <h4 class="font-bold">الشريط الجانبي</h4>
+                            <p>لون الخلفية: <span class="color-value">#f8fafc</span></p>
+                        </div>
+                        <div class="ui-element" onclick="selectUIElement(this, 'content')">
+                            <h4 class="font-bold">المحتوى</h4>
+                            <p>لون الخلفية: <span class="color-value">#ffffff</span></p>
+                        </div>
+                        <div class="ui-element" onclick="selectUIElement(this, 'button')">
+                            <h4 class="font-bold">الأزرار</h4>
+                            <p>لون الخلفية: <span class="color-value">#8b5cf6</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="color-mixer">
+                        <h4 class="font-bold mb-3">اختر لون <span id="selected-element">الرأسية</span>:</h4>
+                        <div class="color-input-group">
+                            <input type="color" class="color-input" id="color-picker" value="#6366f1" onchange="updateUIColor()">
+                            <input type="range" class="color-slider" id="hue-slider" min="0" max="360" value="238" oninput="updateFromHue()">
+                            <span id="color-hex">#6366f1</span>
+                        </div>
+                        <div class="color-result" id="color-result" style="background-color: #6366f1;"></div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-300 mt-6">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="md:w-1/4 h-64 rounded-lg" id="ui-header" style="background-color: #6366f1;"></div>
+                            <div class="md:w-3/4 flex gap-4">
+                                <div class="w-1/4 h-64 rounded-lg" id="ui-sidebar" style="background-color: #f8fafc;"></div>
+                                <div class="w-3/4 h-64 rounded-lg p-4" id="ui-content" style="background-color: #ffffff;">
+                                    <h3 class="font-bold mb-2">عنوان المحتوى</h3>
+                                    <p class="mb-4">هذا مثال لمحتوى الصفحة. يمكنك تغيير ألوان العناصر المختلفة من الأدوات أعلاه.</p>
+                                    <button class="px-4 py-2 rounded-lg text-white" id="ui-button" style="background-color: #8b5cf6;">زر تفاعلي</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">اختبار نظرية الألوان</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">10 أسئلة اختيار من متعدد — للتأكد من الفهم</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-white rounded-xl card-shadow p-8" data-aos="fade-up">
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium">السؤال <span id="current-question">1</span> من 10</span>
+                        <span class="text-sm font-medium">النتيجة: <span id="score">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress" style="width: 10%"></div>
+                    </div>
+                </div>
+                
+                <div id="quiz-container">
+                    <!-- Question 1 -->
+                    <div class="question active" id="question-1">
+                        <h3 class="text-xl font-bold mb-6">ما هو النموذج اللوني المستخدم في الشاشات؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(1, 'A', false)">
+                                أ) CMYK
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(1, 'B', true)">
+                                ب) RGB
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(1, 'C', false)">
+                                ج) Pantone
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(1, 'D', false)">
+                                د) RYB
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-1" disabled>
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-1" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="question hidden" id="question-2">
+                        <h3 class="text-xl font-bold mb-6">أي نوع من التناسق يعطي أعلى تباين بصري؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(2, 'A', false)">
+                                أ) Analogous
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(2, 'B', false)">
+                                ب) Monochromatic
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(2, 'C', true)">
+                                ج) Complementary
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(2, 'D', false)">
+                                د) Triadic
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-2">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-2" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="question hidden" id="question-3">
+                        <h3 class="text-xl font-bold mb-6">ماذا يعني مصطلح "Saturation"؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(3, 'A', false)">
+                                أ) درجة الإضاءة (Lightness)
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(3, 'B', true)">
+                                ب) نقاء/حدة اللون
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(3, 'C', false)">
+                                ج) مقدار الشفافية
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(3, 'D', false)">
+                                د) موقع اللون على العجلة
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-3">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-3" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="question hidden" id="question-4">
+                        <h3 class="text-xl font-bold mb-6">في الطباعة نستخدم أي نموذج؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(4, 'A', false)">
+                                أ) RGB
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(4, 'B', false)">
+                                ب) HSL
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(4, 'C', true)">
+                                ج) CMYK
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(4, 'D', false)">
+                                د) HEX
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-4">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-4" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="question hidden" id="question-5">
+                        <h3 class="text-xl font-bold mb-6">أي معدل تباين (Contrast Ratio) أقل شيء موصى به لنص عادي حسب معيار WCAG؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(5, 'A', false)">
+                                أ) 1.5:1
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(5, 'B', false)">
+                                ب) 3:1
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(5, 'C', true)">
+                                ج) 4.5:1
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(5, 'D', false)">
+                                د) 7:1
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-5">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-5" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="question hidden" id="question-6">
+                        <h3 class="text-xl font-bold mb-6">ما الذي يصف التدرج اللوني؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(6, 'A', false)">
+                                أ) تغيير في الشفافية فقط
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(6, 'B', true)">
+                                ب) انتقال سلس بين لونين أو أكثر
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(6, 'C', false)">
+                                ج) لون معكوس على العجلة
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(6, 'D', false)">
+                                د) لون ثابت غير متغير
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-6">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-6" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 7 -->
+                    <div class="question hidden" id="question-7">
+                        <h3 class="text-xl font-bold mb-6">أي من التالي ليس نوع من تناغم الألوان؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(7, 'A', false)">
+                                أ) Split-Complementary
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(7, 'B', true)">
+                                ب) Pentadic
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(7, 'C', false)">
+                                ج) Tetradic
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(7, 'D', false)">
+                                د) Analogous
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-7">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-7" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 8 -->
+                    <div class="question hidden" id="question-8">
+                        <h3 class="text-xl font-bold mb-6">لو حد بيعاني من عمى ألوان أحمر-أخضر، إزاي نضمن تفهمه للـ status؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(8, 'A', false)">
+                                أ) نعتمد على اللون فقط
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(8, 'B', true)">
+                                ب) نستخدم رمز/نص/شكل بالإضافة للون
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(8, 'C', false)">
+                                ج) نستخدم ألوان أحمر أخضر معًا
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(8, 'D', false)">
+                                د) نخفي الحالة عنه
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-8">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-8" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 9 -->
+                    <div class="question hidden" id="question-9">
+                        <h3 class="text-xl font-bold mb-6">أي أداة تختارها لاختبار نسبة التباين؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(9, 'A', false)">
+                                أ) Color Wheel فقط
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(9, 'B', true)">
+                                ب) Contrast Checker
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(9, 'C', false)">
+                                ج) Coolors (لوحدها)
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(9, 'D', false)">
+                                د) أي موقع صور
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-9">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="nextQuestion()" id="next-9" disabled>
+                                التالي <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 10 -->
+                    <div class="question hidden" id="question-10">
+                        <h3 class="text-xl font-bold mb-6">في HSL، ماذا تمثل H؟</h3>
+                        <div class="space-y-3">
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="A" onclick="selectOption(10, 'A', true)">
+                                أ) Hue (الصبغة)
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="B" onclick="selectOption(10, 'B', false)">
+                                ب) Highlight (تألُّق)
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="C" onclick="selectOption(10, 'C', false)">
+                                ج) Hardness (صلابة)
+                            </div>
+                            <div class="quiz-option border border-gray-300 rounded-lg p-4 cursor-pointer" data-option="D" onclick="selectOption(10, 'D', false)">
+                                د) Heat (حرارة)
+                            </div>
+                        </div>
+                        <div class="quiz-nav">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg" onclick="previousQuestion()" id="prev-10">
+                                <i class="fas fa-arrow-right ml-2"></i> السابق
+                            </button>
+                            <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg" onclick="showResults()" id="next-10" disabled>
+                                عرض النتائج <i class="fas fa-arrow-left ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Results -->
+                    <div class="question hidden" id="results">
+                        <h3 class="text-2xl font-bold mb-6 text-center">نتيجة الاختبار</h3>
+                        <div class="text-center mb-8">
+                            <div class="inline-block relative">
+                                <div class="w-48 h-48 rounded-full border-8 border-gray-200 flex items-center justify-center">
+                                    <span class="text-4xl font-bold" id="final-score">0/10</span>
+                                </div>
+                                <div class="absolute top-0 right-0 w-48 h-48 rounded-full border-8 border-transparent border-t-indigo-600 border-r-indigo-600 transform -rotate-45" id="score-circle"></div>
+                            </div>
+                        </div>
+                        <div class="text-center mb-8">
+                            <p class="text-xl mb-4" id="result-message">رسالة النتيجة</p>
+                            <div class="quiz-nav justify-center">
+                                <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium" onclick="restartQuiz()">
+                                    إعادة الاختبار
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Topics Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">عناوين رئيسية للبحث أكثر</h2>
+                <div class="w-24 h-1 bg-indigo-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">لو عايز تتوسّع بعد كده، ابحث عن المواضيع دي:</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up">
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Color Theory History & Models</h3>
+                    <p class="text-gray-600 text-sm">RYB vs RGB vs CMYK vs LAB</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Color Management & Color Profiles</h3>
+                    <p class="text-gray-600 text-sm">sRGB, Adobe RGB, ICC profiles</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">WCAG Color Accessibility Guidelines</h3>
+                    <p class="text-gray-600 text-sm">Contrast Ratios</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Color Blindness Types and Simulations</h3>
+                    <p class="text-gray-600 text-sm">Deuteranopia, Protanopia, Tritanopia</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Psychology of Color across Cultures</h3>
+                    <p class="text-gray-600 text-sm">الدلالات الثقافية للألوان</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Color Harmonies & Algorithms</h3>
+                    <p class="text-gray-600 text-sm">K-means for palette extraction</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Practical Color Systems</h3>
+                    <p class="text-gray-600 text-sm">Material Design palette, Tailwind colors</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Color in Data Visualization</h3>
+                    <p class="text-gray-600 text-sm">Perceptually uniform colormaps, ColorBrewer</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Print Color Separation & Spot Colors</h3>
+                    <p class="text-gray-600 text-sm">Pantone</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl card-shadow hover-scale">
+                    <h3 class="text-lg font-bold mb-2">Tools & Workflows for Designers</h3>
+                    <p class="text-gray-600 text-sm">color pickers, plugins, Figma/Sketch color styles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Page Button -->
+    <div class="text-center py-12 bg-white">
+        <a href="./w4.html" class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition">
+            التالي
+            <i class="fas fa-arrow-left mr-2"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 font-bold text-xl mr-3">
+                            S
+                        </div>
+                        <h3 class="text-xl font-bold">Ahmed Tawheed</h3>
+                    </div>
+                    <p class="mt-2 text-gray-400">دورة نظرية الألوان</p>
+                </div>
+                
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 جميع الحقوق محفوظة. تصميم وتطوير: Ahmed Tawheed</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Button -->
+    <div class="floating-button" id="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollToTopButton = document.getElementById('scroll-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopButton.style.display = 'flex';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        });
+        
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Interactive Color Harmony Demo
+        function showHarmony(type) {
+            const demo = document.getElementById('color-harmony-demo');
+            demo.innerHTML = '';
+            
+            let colors = [];
+            
+            switch(type) {
+                case 'complementary':
+                    colors = [
+                        { color: '#3b82f6', name: 'أزرق' },
+                        { color: '#ef4444', name: 'أحمر' }
+                    ];
+                    break;
+                case 'analogous':
+                    colors = [
+                        { color: '#3b82f6', name: 'أزرق' },
+                        { color: '#8b5cf6', name: 'بنفسجي' },
+                        { color: '#ec4899', name: 'وردي' }
+                    ];
+                    break;
+                case 'triadic':
+                    colors = [
+                        { color: '#3b82f6', name: 'أزرق' },
+                        { color: '#ef4444', name: 'أحمر' },
+                        { color: '#10b981', name: 'أخضر' }
+                    ];
+                    break;
+                case 'monochromatic':
+                    colors = [
+                        { color: '#1d4ed8', name: 'أزرق غامق' },
+                        { color: '#3b82f6', name: 'أزرق' },
+                        { color: '#93c5fd', name: 'أزرق فاتح' },
+                        { color: '#dbeafe', name: 'أزرق شاحب' }
+                    ];
+                    break;
+            }
+            
+            colors.forEach(item => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'harmony-color';
+                colorDiv.style.backgroundColor = item.color;
+                colorDiv.textContent = item.name;
+                colorDiv.onclick = () => copyColor(item.color);
+                demo.appendChild(colorDiv);
+            });
+        }
+        
+        function copyColor(color) {
+            navigator.clipboard.writeText(color);
+            
+            // Create a temporary element to show the copied message
+            const message = document.createElement('div');
+            message.textContent = `تم نسخ اللون: ${color}`;
+            message.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            document.body.appendChild(message);
+            
+            // Remove the message after 2 seconds
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+
+        // Interactive UI Example
+        let selectedUIElement = 'header';
+        
+        function selectUIElement(element, type) {
+            // Remove active class from all elements
+            document.querySelectorAll('.ui-element').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Add active class to selected element
+            element.classList.add('active');
+            
+            // Update selected element type
+            selectedUIElement = type;
+            
+            // Update the selected element text
+            document.getElementById('selected-element').textContent = element.querySelector('h4').textContent;
+            
+            // Update color picker to match the selected element
+            const colorValue = element.querySelector('.color-value').textContent;
+            document.getElementById('color-picker').value = colorValue;
+            document.getElementById('color-hex').textContent = colorValue;
+            document.getElementById('color-result').style.backgroundColor = colorValue;
+        }
+        
+        function updateUIColor() {
+            const color = document.getElementById('color-picker').value;
+            document.getElementById('color-hex').textContent = color;
+            document.getElementById('color-result').style.backgroundColor = color;
+            
+            // Update the UI element color
+            switch(selectedUIElement) {
+                case 'header':
+                    document.getElementById('ui-header').style.backgroundColor = color;
+                    document.querySelector('[data-element="header"] .color-value').textContent = color;
+                    break;
+                case 'sidebar':
+                    document.getElementById('ui-sidebar').style.backgroundColor = color;
+                    document.querySelector('[data-element="sidebar"] .color-value').textContent = color;
+                    break;
+                case 'content':
+                    document.getElementById('ui-content').style.backgroundColor = color;
+                    document.querySelector('[data-element="content"] .color-value').textContent = color;
+                    break;
+                case 'button':
+                    document.getElementById('ui-button').style.backgroundColor = color;
+                    document.querySelector('[data-element="button"] .color-value').textContent = color;
+                    break;
+            }
+        }
+        
+        function updateFromHue() {
+            const hue = document.getElementById('hue-slider').value;
+            // Convert HSL to HEX (simplified)
+            const h = hue / 360;
+            const s = 0.7;
+            const l = 0.5;
+            
+            let r, g, b;
+            
+            if (s === 0) {
+                r = g = b = l; // achromatic
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            
+            const toHex = x => {
+                const hex = Math.round(x * 255).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+            
+            const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+            document.getElementById('color-picker').value = hex;
+            updateUIColor();
+        }
+
+        // Quiz Functionality
+        let currentQuestion = 1;
+        let score = 0;
+        const totalQuestions = 10;
+        let selectedAnswers = {};
+
+        function selectOption(questionNum, option, isCorrect) {
+            // If the question is already answered, return
+            if (selectedAnswers[questionNum] !== undefined) {
+                return;
+            }
+            
+            // Store the selected answer
+            selectedAnswers[questionNum] = { option, isCorrect };
+            
+            // Get all options for this question
+            const options = document.querySelectorAll(`#question-${questionNum} .quiz-option`);
+            
+            // Mark the selected option
+            const selectedOptionElement = Array.from(options).find(opt => 
+                opt.getAttribute('data-option') === option
+            );
+            selectedOptionElement.classList.add('selected');
+            
+            // If correct, update score
+            if (isCorrect) {
+                selectedOptionElement.classList.add('correct');
+                score++;
+                document.getElementById('score').textContent = score;
+            } else {
+                selectedOptionElement.classList.add('incorrect');
+                
+                // Find and mark correct option
+                options.forEach(opt => {
+                    if (questionNum === 1 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 2 && opt.getAttribute('data-option') === 'C') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 3 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 4 && opt.getAttribute('data-option') === 'C') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 5 && opt.getAttribute('data-option') === 'C') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 6 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 7 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 8 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 9 && opt.getAttribute('data-option') === 'B') {
+                        opt.classList.add('correct');
+                    } else if (questionNum === 10 && opt.getAttribute('data-option') === 'A') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            // Enable next button
+            document.getElementById(`next-${questionNum}`).disabled = false;
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+        }
+
+        function nextQuestion() {
+            // Hide current question
+            document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+            
+            // Move to next question
+            currentQuestion++;
+            
+            // Show next question or results
+            if (currentQuestion <= totalQuestions) {
+                document.getElementById(`question-${currentQuestion}`).classList.remove('hidden');
+                document.getElementById('current-question').textContent = currentQuestion;
+                
+                // Update progress bar
+                const progress = (currentQuestion / totalQuestions) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+                
+                // Enable/disable previous button
+                document.getElementById(`prev-${currentQuestion}`).disabled = (currentQuestion === 1);
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            // Hide current question
+            document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+            
+            // Move to previous question
+            currentQuestion--;
+            
+            // Show previous question
+            document.getElementById(`question-${currentQuestion}`).classList.remove('hidden');
+            document.getElementById('current-question').textContent = currentQuestion;
+            
+            // Update progress bar
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            
+            // Enable/disable previous button
+            document.getElementById(`prev-${currentQuestion}`).disabled = (currentQuestion === 1);
+        }
+
+        function showResults() {
+            // Hide current question
+            document.getElementById(`question-${currentQuestion}`).classList.add('hidden');
+            
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+            
+            // Update final score
+            document.getElementById('final-score').textContent = `${score}/${totalQuestions}`;
+            
+            // Update score circle
+            const percentage = (score / totalQuestions) * 100;
+            const circle = document.getElementById('score-circle');
+            const rotation = (percentage / 100) * 360;
+            circle.style.transform = `rotate(${rotation - 45}deg)`;
+            
+            // Update result message
+            let message = '';
+            if (score >= 9) {
+                message = 'ممتاز! لقد أتقنت نظرية الألوان.';
+            } else if (score >= 7) {
+                message = 'جيد جدًا! لديك فهم قوي لنظرية الألوان.';
+            } else if (score >= 5) {
+                message = 'جيد! يمكنك تحسين معرفتك بنظرية الألوان.';
+            } else {
+                message = 'تحتاج إلى المزيد من التعلم حول نظرية الألوان.';
+            }
+            document.getElementById('result-message').textContent = message;
+        }
+
+        function restartQuiz() {
+            // Reset variables
+            currentQuestion = 1;
+            score = 0;
+            selectedAnswers = {};
+            
+            // Reset UI
+            document.getElementById('score').textContent = score;
+            document.getElementById('current-question').textContent = currentQuestion;
+            document.getElementById('progress').style.width = '10%';
+            
+            // Hide results and show first question
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('question-1').classList.remove('hidden');
+            
+            // Reset all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const options = document.querySelectorAll(`#question-${i} .quiz-option`);
+                const nextButton = document.getElementById(`next-${i}`);
+                const prevButton = document.getElementById(`prev-${i}`);
+                
+                options.forEach(option => {
+                    option.classList.remove('correct', 'incorrect', 'selected');
+                    option.style.pointerEvents = 'auto';
+                });
+                
+                nextButton.disabled = true;
+                if (prevButton) {
+                    prevButton.disabled = (i === 1);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
